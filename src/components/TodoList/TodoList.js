@@ -13,11 +13,32 @@ export default class TodoList extends Component {
         }
 
         this.addTodo = this.addTodo.bind(this)
-        // this.removeTodo = this.removeTodo.bind(this)
-        // this.editTodo = this.editTodo.bind(this)
+        this.removeTodo = this.removeTodo.bind(this)
+        this.editTodo = this.editTodo.bind(this)
         this.todoTitleHandler = this.todoTitleHandler.bind(this)
         // this.statusHandler = this.statusHandler.bind(this)
 
+    }
+
+    removeTodo(todoID){
+
+        const newTodos = [...this.state.todos]        
+
+        const mainTodo = newTodos.findIndex(todo => (
+            todo.id === todoID
+        ))
+
+        newTodos.splice(mainTodo, 1)
+
+        this.setState({
+            todos: newTodos
+        })
+        
+        
+    }
+
+    editTodo(todoID){
+        
     }
 
     todoTitleHandler(event){
@@ -62,7 +83,7 @@ export default class TodoList extends Component {
                 <div className="todo-container">
                     <ul className="todo-list">
                         {this.state.todos.map(todo => (
-                            <Todo {...todo} key={todo.id}/>
+                            <Todo {...todo} key={todo.id} onTrashHandler={this.removeTodo} onCheckHandler={this.editTodo}/>
                         ))}
                     </ul>
                 </div>
