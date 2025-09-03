@@ -29,15 +29,16 @@ export default class TodoList extends Component {
     addTodo(event){
         event.preventDefault()
         if(this.state.todoTitle){
-            this.setState(prevState => (
-                {todos: [...prevState.todos , this.state.todoTitle]}
-            ))
-        }
+            const newTodo = {
+                id: this.state.todos.length +1 ,
+                title: this.state.todoTitle
+            }
 
-        this.setState(
-            {todoTitle: ''}
-        )
-        
+            this.setState(prevState => ({
+                todos: [...prevState.todos , newTodo],
+                todoTitle: ''
+            }))
+        }
     }
 
     render() {
@@ -60,10 +61,9 @@ export default class TodoList extends Component {
 
                 <div className="todo-container">
                     <ul className="todo-list">
-                        
-                            <Todo />
-                        
-                     
+                        {this.state.todos.map(todo => (
+                            <Todo {...todo}/>
+                        ))}
                     </ul>
                 </div>
             </>
