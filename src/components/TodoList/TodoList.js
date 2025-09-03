@@ -12,7 +12,7 @@ export default class TodoList extends Component {
             status: 'all'
         }
 
-        // this.addTodo = this.addTodo.bind(this)
+        this.addTodo = this.addTodo.bind(this)
         // this.removeTodo = this.removeTodo.bind(this)
         // this.editTodo = this.editTodo.bind(this)
         this.todoTitleHandler = this.todoTitleHandler.bind(this)
@@ -26,13 +26,24 @@ export default class TodoList extends Component {
         )
     }
 
+    addTodo(event){
+        event.preventDefault()
+        if(this.state.todoTitle){
+            this.setState((prevState) => (
+                {todos: [...prevState.todos , this.state.todoTitle]}
+            )
+                
+            )
+        }
+    }
+
     render() {
         return (
             <>
                 <Header />
                 <form>
                     <input type="text" className="todo-input" maxLength="40" value={this.state.todoTitle} onChange={this.todoTitleHandler}/>
-                    <button className="todo-button" type="submit">
+                    <button className="todo-button" type="submit" onClick={this.addTodo}>
                         <i className="fas fa-plus-square"></i>
                     </button>
                     <div className="select">
