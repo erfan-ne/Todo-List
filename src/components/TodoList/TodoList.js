@@ -62,7 +62,7 @@ export default class TodoList extends Component {
                 <div className="todo-container">
                     <ul className="todo-list">
                         {this.state.todos.map(todo => (
-                            <Todo {...todo}/>
+                            <Todo {...todo} key={todo.id}/>
                         ))}
                     </ul>
                 </div>
