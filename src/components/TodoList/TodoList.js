@@ -45,16 +45,7 @@ export default class TodoList extends Component {
                 return todo
             })
             return {todos: updateTodos}
-        })       
-
-        
-        
-
-
-        // this.setState({
-        //     todos: updateTodos
-        // }) 
-        
+        })
     }
 
     todoTitleHandler(event){
