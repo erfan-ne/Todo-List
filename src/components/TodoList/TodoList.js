@@ -29,12 +29,15 @@ export default class TodoList extends Component {
     addTodo(event){
         event.preventDefault()
         if(this.state.todoTitle){
-            this.setState((prevState) => (
+            this.setState(prevState => (
                 {todos: [...prevState.todos , this.state.todoTitle]}
-            )
-                
-            )
+            ))
         }
+
+        this.setState(
+            {todoTitle: ''}
+        )
+        
     }
 
     render() {
