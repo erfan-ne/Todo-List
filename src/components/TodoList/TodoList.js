@@ -22,22 +22,38 @@ export default class TodoList extends Component {
 
     removeTodo(todoID){
 
-        const newTodos = [...this.state.todos]        
+        const updateTodos = [...this.state.todos]        
 
-        const mainTodo = newTodos.findIndex(todo => (
+        const mainTodo = updateTodos.findIndex(todo => (
             todo.id === todoID
         ))
 
-        newTodos.splice(mainTodo, 1)
+        updateTodos.splice(mainTodo, 1)
 
         this.setState({
-            todos: newTodos
-        })
-        
-        
+            todos: updateTodos
+        }) 
     }
 
     editTodo(todoID){
+        
+        this.setState(prevState =>{
+            const updateTodos = prevState.todos.map(todo =>{
+                if(todo.id === todoID){
+                    return {...todo , isComplete: !todo.isComplete}
+                }
+                return todo
+            })
+            return {todos: updateTodos}
+        })       
+
+        
+        
+
+
+        // this.setState({
+        //     todos: updateTodos
+        // }) 
         
     }
 
@@ -52,7 +68,8 @@ export default class TodoList extends Component {
         if(this.state.todoTitle){
             const newTodo = {
                 id: this.state.todos.length +1 ,
-                title: this.state.todoTitle
+                title: this.state.todoTitle,
+                isComplete: false
             }
 
             this.setState(prevState => ({
