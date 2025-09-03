@@ -15,9 +15,15 @@ export default class TodoList extends Component {
         // this.addTodo = this.addTodo.bind(this)
         // this.removeTodo = this.removeTodo.bind(this)
         // this.editTodo = this.editTodo.bind(this)
-        // this.todoTitleHandler = this.todoTitleHandler.bind(this)
+        this.todoTitleHandler = this.todoTitleHandler.bind(this)
         // this.statusHandler = this.statusHandler.bind(this)
 
+    }
+
+    todoTitleHandler(event){
+        this.setState(
+            {todoTitle: event.target.value}
+        )
     }
 
     render() {
@@ -25,7 +31,7 @@ export default class TodoList extends Component {
             <>
                 <Header />
                 <form>
-                    <input type="text" className="todo-input" maxLength="40"/>
+                    <input type="text" className="todo-input" maxLength="40" value={this.state.todoTitle} onChange={this.todoTitleHandler}/>
                     <button className="todo-button" type="submit">
                         <i className="fas fa-plus-square"></i>
                     </button>
