@@ -16,7 +16,7 @@ export default class TodoList extends Component {
         this.removeTodo = this.removeTodo.bind(this)
         this.editTodo = this.editTodo.bind(this)
         this.todoTitleHandler = this.todoTitleHandler.bind(this)
-        // this.statusHandler = this.statusHandler.bind(this)
+        this.statusHandler = this.statusHandler.bind(this)
 
     }
 
@@ -70,6 +70,13 @@ export default class TodoList extends Component {
         }
     }
 
+    statusHandler(event){
+        this.setState({
+            status: event.target.value
+        })
+        
+    }
+
     render() {
         return (
             <>
@@ -80,7 +87,7 @@ export default class TodoList extends Component {
                         <i className="fas fa-plus-square"></i>
                     </button>
                     <div className="select">
-                        <select name="todos" className="filter-todo">
+                        <select name="todos" className="filter-todo" onChange={this.statusHandler}>
                             <option value="all">All</option>
                             <option value="completed">Completed</option>
                             <option value="uncompleted">Uncompleted</option>
@@ -90,7 +97,15 @@ export default class TodoList extends Component {
 
                 <div className="todo-container">
                     <ul className="todo-list">
-                        {this.state.todos.map(todo => (
+                        {this.state.status === "completed" && this.state.todos.filter(todo=> todo.isComplete).map(todo=>(
+                            <Todo {...todo} key={todo.id} onTrashHandler={this.removeTodo} onCheckHandler={this.editTodo}/>
+                        ))}
+
+                        {this.state.status === "uncompleted" && this.state.todos.filter(todo=> !todo.isComplete).map(todo=>(
+                            <Todo {...todo} key={todo.id} onTrashHandler={this.removeTodo} onCheckHandler={this.editTodo}/>
+                        ))}
+
+                        {this.state.status === "all" && this.state.todos.map(todo=>(
                             <Todo {...todo} key={todo.id} onTrashHandler={this.removeTodo} onCheckHandler={this.editTodo}/>
                         ))}
                     </ul>
