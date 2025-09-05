@@ -22,13 +22,9 @@ export default class TodoList extends Component {
 
     removeTodo(todoID){
 
-        const updateTodos = [...this.state.todos]        
-
-        const mainTodo = updateTodos.findIndex(todo => (
-            todo.id === todoID
+        const updateTodos = this.state.todos.filter(todo=>(
+            todo.id !== todoID
         ))
-
-        updateTodos.splice(mainTodo, 1)
 
         this.setState({
             todos: updateTodos
