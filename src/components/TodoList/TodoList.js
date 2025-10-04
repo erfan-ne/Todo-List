@@ -30,9 +30,7 @@ export default function TodoList () {
     }
 
     const todoTitleHandler = (event) => {
-        this.setState(
-            {todoTitle: event.target.value}
-        )
+        setTodoTitle(event.target.value)
     }
 
     const addTodo = (event) => {
