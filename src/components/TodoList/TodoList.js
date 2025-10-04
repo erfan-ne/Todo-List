@@ -42,7 +42,7 @@ export default function TodoList () {
                 isComplete: false
             }
 
-            setTodos(prevTodos => [...prevTodos.todos , newTodo])
+            setTodos(prevTodos => [...prevTodos , newTodo])
             setTodoTitle('')
         }
     }
