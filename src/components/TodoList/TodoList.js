@@ -5,12 +5,8 @@ import Todo from './Todo'
 export default function TodoList () {
 
     const [todos, setTodos] = useState([])
-        this.state = {
-            todos: [],
-            todoTitle: '',
-            status: 'all'
-        }
-
+    const [todoTitle, setTodoTitle] = useState('')
+    const [status, setStatus] = useState('all')
 
     removeTodo(todoID){
 
