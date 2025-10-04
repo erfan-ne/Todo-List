@@ -1,24 +1,16 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import Header from './Header'
 import Todo from './Todo'
 
-export default class TodoList extends Component {
+export default function TodoList () {
 
-    constructor(props) {
-        super(props)
+    const [todos, setTodos] = useState([])
         this.state = {
             todos: [],
             todoTitle: '',
             status: 'all'
         }
 
-        this.addTodo = this.addTodo.bind(this)
-        this.removeTodo = this.removeTodo.bind(this)
-        this.editTodo = this.editTodo.bind(this)
-        this.todoTitleHandler = this.todoTitleHandler.bind(this)
-        this.statusHandler = this.statusHandler.bind(this)
-
-    }
 
     removeTodo(todoID){
 
@@ -73,40 +65,35 @@ export default class TodoList extends Component {
         
     }
 
-    render() {
-        return (
-            <>
-                <Header />
-                <form>
-                    <input type="text" className="todo-input" maxLength="40" value={this.state.todoTitle} onChange={this.todoTitleHandler}/>
-                    <button className="todo-button" type="submit" onClick={this.addTodo}>
-                        <i className="fas fa-plus-square"></i>
-                    </button>
-                    <div className="select">
-                        <select name="todos" className="filter-todo" onChange={this.statusHandler}>
-                            <option value="all">All</option>
-                            <option value="completed">Completed</option>
-                            <option value="uncompleted">Uncompleted</option>
-                        </select>
-                    </div>
-                </form>
-
-                <div className="todo-container">
-                    <ul className="todo-list">
-                        {this.state.status === "completed" && this.state.todos.filter(todo=> todo.isComplete).map(todo=>(
-                            <Todo {...todo} key={todo.id} onTrashHandler={this.removeTodo} onCheckHandler={this.editTodo}/>
-                        ))}
-
-                        {this.state.status === "uncompleted" && this.state.todos.filter(todo=> !todo.isComplete).map(todo=>(
-                            <Todo {...todo} key={todo.id} onTrashHandler={this.removeTodo} onCheckHandler={this.editTodo}/>
-                        ))}
-
-                        {this.state.status === "all" && this.state.todos.map(todo=>(
-                            <Todo {...todo} key={todo.id} onTrashHandler={this.removeTodo} onCheckHandler={this.editTodo}/>
-                        ))}
-                    </ul>
+    return (
+        <>
+            <Header />
+            <form>
+                <input type="text" className="todo-input" maxLength="40" value={this.state.todoTitle} onChange={this.todoTitleHandler}/>
+                <button className="todo-button" type="submit" onClick={this.addTodo}>
+                    <i className="fas fa-plus-square"></i>
+                </button>
+                <div className="select">
+                    <select name="todos" className="filter-todo" onChange={this.statusHandler}>
+                        <option value="all">All</option>
+                        <option value="completed">Completed</option>
+                        <option value="uncompleted">Uncompleted</option>
+                    </select>
                 </div>
-            </>
-        )
-    }
+            </form>
+            <div className="todo-container">
+                <ul className="todo-list">
+                    {this.state.status === "completed" && this.state.todos.filter(todo=> todo.isComplete).map(todo=>(
+                        <Todo {...todo} key={todo.id} onTrashHandler={this.removeTodo} onCheckHandler={this.editTodo}/>
+                    ))}
+                    {this.state.status === "uncompleted" && this.state.todos.filter(todo=> !todo.isComplete).map(todo=>(
+                        <Todo {...todo} key={todo.id} onTrashHandler={this.removeTodo} onCheckHandler={this.editTodo}/>
+                    ))}
+                    {this.state.status === "all" && this.state.todos.map(todo=>(
+                        <Todo {...todo} key={todo.id} onTrashHandler={this.removeTodo} onCheckHandler={this.editTodo}/>
+                    ))}
+                </ul>
+            </div>
+        </>
+    )
 }
