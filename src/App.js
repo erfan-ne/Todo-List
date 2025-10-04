@@ -4,13 +4,11 @@ import './App.css'
 
 //refactoration of the project with finctional component
 
-export default class App extends Component {
+export default function App () {
 
-    render() {
         return (
             <div>
                 <TodoList></TodoList>
             </div>
         )
-    }
 }
