@@ -49,6 +49,7 @@ export default function TodoList () {
 
     const statusHandler = (event) => {
         setStatus(event.target.value)
+        
     }
 
     return (
