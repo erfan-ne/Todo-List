@@ -42,10 +42,8 @@ export default function TodoList () {
                 isComplete: false
             }
 
-            this.setState(prevState => ({
-                todos: [...prevState.todos , newTodo],
-                todoTitle: ''
-            }))
+            setTodos(prevTodos => [...prevTodos.todos , newTodo])
+            setTodoTitle('')
         }
     }
 
