@@ -19,14 +19,15 @@ export default function TodoList () {
 
     const editTodo = (todoID) => {
 
-        setTodos((prevTodos) => {
-            return prevTodos.todos.map(todo =>{
-                if(todo.id === todoID){
-                    return {...todo , isComplete: !todo.isComplete}
-                }
-                return todo
-            })
+        const newTodos = [...todos]
+
+        newTodos.forEach(todo => {
+            if(todo.id === todoID){
+               todo.isComplete = !todo.isComplete
+            }
         })
+
+        setTodos(newTodos)
     }
 
     const todoTitleHandler = (event) => {
