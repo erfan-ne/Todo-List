@@ -49,19 +49,18 @@ export default function TodoList () {
 
     const statusHandler = (event) => {
         setStatus(event.target.value)
-        
     }
 
     return (
         <>
             <Header />
             <form>
-                <input type="text" className="todo-input" maxLength="40" value={todoTitle} onChange={this.todoTitleHandler}/>
-                <button className="todo-button" type="submit" onClick={this.addTodo}>
+                <input type="text" className="todo-input" maxLength="40" value={todoTitle} onChange={todoTitleHandler}/>
+                <button className="todo-button" type="submit" onClick={addTodo}>
                     <i className="fas fa-plus-square"></i>
                 </button>
                 <div className="select">
-                    <select name="todos" className="filter-todo" onChange={this.statusHandler}>
+                    <select name="todos" className="filter-todo" onChange={statusHandler}>
                         <option value="all">All</option>
                         <option value="completed">Completed</option>
                         <option value="uncompleted">Uncompleted</option>
@@ -71,13 +70,13 @@ export default function TodoList () {
             <div className="todo-container">
                 <ul className="todo-list">
                     {status === "completed" && todos.filter(todo=> todo.isComplete).map(todo=>(
-                        <Todo {...todo} key={todo.id} onTrashHandler={this.removeTodo} onCheckHandler={this.editTodo}/>
+                        <Todo {...todo} key={todo.id} onTrashHandler={removeTodo} onCheckHandler={editTodo}/>
                     ))}
                     {status === "uncompleted" && todos.filter(todo=> !todo.isComplete).map(todo=>(
-                        <Todo {...todo} key={todo.id} onTrashHandler={this.removeTodo} onCheckHandler={this.editTodo}/>
+                        <Todo {...todo} key={todo.id} onTrashHandler={removeTodo} onCheckHandler={editTodo}/>
                     ))}
                     {status === "all" && todos.map(todo=>(
-                        <Todo {...todo} key={todo.id} onTrashHandler={this.removeTodo} onCheckHandler={this.editTodo}/>
+                        <Todo {...todo} key={todo.id} onTrashHandler={removeTodo} onCheckHandler={editTodo}/>
                     ))}
                 </ul>
             </div>
