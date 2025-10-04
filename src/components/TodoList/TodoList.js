@@ -8,7 +8,7 @@ export default function TodoList () {
     const [todoTitle, setTodoTitle] = useState('')
     const [status, setStatus] = useState('all')
 
-    removeTodo(todoID){
+    const removeTodo = (todoID) => {
 
         const updateTodos = this.state.todos.filter(todo=>(
             todo.id !== todoID
@@ -19,7 +19,7 @@ export default function TodoList () {
         }) 
     }
 
-    editTodo(todoID){
+    const editTodo = (todoID) => {
         
         this.setState(prevState =>{
             const updateTodos = prevState.todos.map(todo =>{
@@ -32,13 +32,13 @@ export default function TodoList () {
         })
     }
 
-    todoTitleHandler(event){
+    const todoTitleHandler = (event) => {
         this.setState(
             {todoTitle: event.target.value}
         )
     }
 
-    addTodo(event){
+    const addTodo = (event) => {
         event.preventDefault()
         if(this.state.todoTitle){
             const newTodo = {
@@ -54,7 +54,7 @@ export default function TodoList () {
         }
     }
 
-    statusHandler(event){
+    const statusHandler = (event) => {
         this.setState({
             status: event.target.value
         })
